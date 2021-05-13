@@ -2,6 +2,11 @@
 variable "name" {
   type = string
   # required, no default
+
+  validation {
+    condition     = length(var.name) >= 1 && length(var.name) <= 32
+    error_message = "We use var.name as a name_prefix, so it must be 1-32 characters in length."
+  }
 }
 
 variable "honeycomb_dataset_name" {

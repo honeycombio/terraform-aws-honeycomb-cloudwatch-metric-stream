@@ -86,7 +86,7 @@ EOF
 }
 
 resource "aws_s3_bucket" "metric_stream" {
-  bucket = var.name
+  bucket = replace(var.name, "_", "-")
   acl = "private"
 
   tags = var.tags

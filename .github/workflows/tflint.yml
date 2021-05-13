@@ -1,3 +1,5 @@
+name: TFLint
+on: [push, pull_request]
 jobs:
   tflint:
     steps:

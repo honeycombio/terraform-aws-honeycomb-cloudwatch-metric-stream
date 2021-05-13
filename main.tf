@@ -141,8 +141,23 @@ resource "aws_cloudwatch_metric_stream" "metric-stream" {
   firehose_arn = aws_kinesis_firehose_delivery_stream.metrics.arn
   output_format = var.output_format
 
-  include_filter = var.namespace_include_filter
-  exclude_filter = var.namespace_exclude_filter
+ # NOTE: include and exclude filters are _mutually exclusive_, you may not have
+ # both (though this is difficult to enforce in variable validation.
+ dynamic "include_filter"  {
+   for_each = var.namespace_include_filters
+
+   content {
+     namespace = include_filter.value
+   }
+ }
+
+ dynamic "exclude_filter"  {
+   for_each = var.namespace_exclude_filters
+
+   content {
+     namespace = exclude_filter.value
+   }
+ }
 
   tags = var.tags
 }

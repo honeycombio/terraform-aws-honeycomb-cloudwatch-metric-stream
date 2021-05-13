@@ -24,22 +24,14 @@ variable "tags" {
   default = {}
 }
 
-variable "namespace_include_filter" {
+variable "namespace_include_filters" {
   type = list(string)
-  # TODO: does default null satisfy type list(string), or do we need to go with
-  # type any? (sigh)
-  #
-  # Also, if this is list(string), we need to map it to: s -> { namespace = s };
-  # or we could use list(object{namespace=string})
-  #
-  # This variable needs testing. (And should be consistent with the
-  # namespace_exclude_filter below.)
-  default = null
+  default = []
 }
 
-variable "namespace_exclude_filter" {
+variable "namespace_exclude_filters" {
   type = list(string)
-  default = null
+  default = []
 }
 
 variable "s3_buffer_size" {

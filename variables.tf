@@ -19,6 +19,11 @@ variable "honeycomb_api_key" {
 
 
 # Optional variables for customer configuration
+variable "honeycomb_api_host" {
+  type = string
+  default = "https://api.honeycomb.io"
+}
+
 variable "tags" {
   type = map(string)
   default = {}
@@ -95,11 +100,6 @@ variable "s3_force_destroy" {
 # Optional variables you are unlikely to want to modify; these are here to ease
 # development and long-term maintainability. Only the default values are
 # supported.
-variable "honeycomb_api_base_url" {
-  type = string
-  default = "https://api.honeycomb.io/1/kinesis_events"
-}
-
 variable "output_format" {
   type = string
   default = "opentelemetry0.7"

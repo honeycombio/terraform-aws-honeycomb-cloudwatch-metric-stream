@@ -109,7 +109,7 @@ resource "aws_kinesis_firehose_delivery_stream" "metrics" {
   }
 
    http_endpoint_configuration {
-     url                = "${var.honeycomb_api_base_url}/${var.honeycomb_dataset_name}"
+     url                = "${var.honeycomb_api_host}/1/kinesis_events/${var.honeycomb_dataset_name}"
      name               = "Honeycomb-${var.honeycomb_dataset_name}"
 
      access_key         = var.honeycomb_api_key

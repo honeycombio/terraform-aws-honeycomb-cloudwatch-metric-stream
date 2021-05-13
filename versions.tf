@@ -5,5 +5,6 @@ terraform {
     aws = {
       source = "hashicorp/aws"
       version = "TODO" # TODO: pending https://github.com/hashicorp/terraform-provider-aws/pull/18870
+    }
   }
 }

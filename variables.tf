@@ -69,6 +69,19 @@ variable "s3_backup_mode" {
   default = "FailedDataOnly"
 }
 
+# By default, AWS will decline to delete S3 buckets that are not empty:
+# `BucketNotEmpty: The bucket you tried to delete is not empty`.  These buckets
+# are used for backup if delivery or processing fail.
+#
+# To allow this module's resources to be removed, we've set force_destroy =
+# true, allowing non-empty buckets to be deleted. If you want to block this and
+# preserve those failed deliveries, you can set this value to false, though that
+# will leave terraform unable to cleanly destroy the module.
+variable "s3_force_destroy" {
+  type = bool
+  default = true
+}
+
 
 # Optional variables you are unlikely to modify
 variable "honeycomb_api_base_url" {
@@ -80,4 +93,3 @@ variable "output_format" {
   type = string
   default = "opentelemetry0.7"
 }
-

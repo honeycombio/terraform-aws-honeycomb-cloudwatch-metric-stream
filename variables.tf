@@ -27,41 +27,50 @@ variable "tags" {
 variable "namespace_include_filters" {
   type = list(string)
   default = []
+  description = "An optional list of CloudWatch Metric namespaces to include. If set, we'll only stream metrics from these namespaces. Mutually exclusive with `namespace_exclude_filters`."
 }
 
 variable "namespace_exclude_filters" {
   type = list(string)
   default = []
+  description = "An optional list of CloudWatch Metric namespaces to exclude. If set, we'll only stream metrics that are not in these namespaces. Mutually exclusive with `namespace_include_filters`."
 }
 
 variable "s3_buffer_size" {
   type = number
   default = 10
+  description = "In MiB. See https://docs.aws.amazon.com/firehose/latest/dev/create-configure.html"
+
+  validation {
+    condition     = var.s3_buffer_size >= 1 && var.s3_buffer_size <= 128
+    error_message = "The s3_buffer_size must be 1-128 MiBs."
+  }
 }
 
 variable "s3_buffer_interval" {
   type = number
   default = 400
+  description = "In seconds. See https://docs.aws.amazon.com/firehose/latest/dev/create-configure.html"
+
+  validation {
+    condition     = var.s3_buffer_interval >= 60 && var.s3_buffer_interval <= 900
+    error_message = "The s3_buffer_interval must be 60-900 seconds."
+  }
 }
 
 variable "s3_compression_format" {
   type = string
   default = "GZIP"
-}
+  description = "May be GZIP, Snappy, Zip, or Hadoop-Compatiable Snappy. See https://docs.aws.amazon.com/firehose/latest/dev/create-configure.html"
 
-variable "http_buffering_size" {
-  type = number
-  default = 15
-}
-
-variable "http_buffering_interval" {
-  type = number
-  default = 600
-}
-
-variable "http_content_encoding" {
-  type = string
-  default = "GZIP"
+  validation {
+    condition     = contains(["GZIP",
+      "Snappy",
+      "Zip",
+      "Hadoop-Compatible Snappy"],
+      var.s3_compression_format)
+    error_message = "Not an allowed compression format."
+  }
 }
 
 variable "s3_backup_mode" {
@@ -83,7 +92,9 @@ variable "s3_force_destroy" {
 }
 
 
-# Optional variables you are unlikely to modify
+# Optional variables you are unlikely to want to modify; these are here to ease
+# development and long-term maintainability. Only the default values are
+# supported.
 variable "honeycomb_api_base_url" {
   type = string
   default = "https://api.honeycomb.io/1/kinesis_events"
@@ -92,4 +103,19 @@ variable "honeycomb_api_base_url" {
 variable "output_format" {
   type = string
   default = "opentelemetry0.7"
+}
+
+variable "http_buffering_size" {
+  type = number
+  default = 15
+}
+
+variable "http_buffering_interval" {
+  type = number
+  default = 600
+}
+
+variable "http_content_encoding" {
+  type = string
+  default = "GZIP"
 }

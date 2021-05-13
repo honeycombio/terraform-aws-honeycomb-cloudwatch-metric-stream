@@ -37,8 +37,6 @@ module "cloudwatch_metric_stream_default" {
 
   honeycomb_api_key = var.honeycomb_api_key
 
-  # To check tags, use
-  # `aws cloudwatch list-tags-for-resource --resource-arn $arn`
   tags = {
     Environment = "ismith-sandbox"
   }
@@ -56,8 +54,6 @@ module "cloudwatch_metric_stream_with_includes" {
     Environment = "ismith-sandbox"
   }
 
-  # To check this, use
-  # `aws cloudwatch get-metric-stream --name $name`
   namespace_include_filters = ["AWS/RDS", "AWS/ELB"]
 }
 
@@ -73,7 +69,5 @@ module "cloudwatch_metric_stream_with_excludes" {
     Environment = "ismith-sandbox"
   }
 
-  # To check this, use
-  # `aws cloudwatch get-metric-stream --name $name`
   namespace_exclude_filters = ["AWS/RDS", "AWS/ELB"]
 }

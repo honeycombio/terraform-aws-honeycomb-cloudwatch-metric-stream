@@ -10,7 +10,6 @@ variable "honeycomb_dataset_name" {
 
 variable "honeycomb_api_key" {
   type = string
-  sensitive = true
 }
 
 

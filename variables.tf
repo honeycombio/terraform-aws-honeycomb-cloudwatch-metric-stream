@@ -108,11 +108,13 @@ variable "output_format" {
 variable "http_buffering_size" {
   type = number
   default = 15
+  description = "Kinesis Firehose http buffer size, in MiB."
 }
 
 variable "http_buffering_interval" {
   type = number
-  default = 600
+  default = 60
+  description = "Kinesis Firehose http buffer interval, in seconds."
 }
 
 variable "http_content_encoding" {

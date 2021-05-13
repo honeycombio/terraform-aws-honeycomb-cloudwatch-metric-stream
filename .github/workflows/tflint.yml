@@ -2,6 +2,7 @@ name: TFLint
 on: [push, pull_request]
 jobs:
   tflint:
+    runs-on: ubuntu-latest
     steps:
     - name: GitHub Action linting Terraform files
       uses: devops-infra/action-tflint@0.3

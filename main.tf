@@ -137,7 +137,7 @@ resource "aws_kinesis_firehose_delivery_stream" "metrics" {
 
 resource "aws_cloudwatch_metric_stream" "metric-stream" {
   name = var.name
-  role_arn = aws_iam_role.firehose.arn
+  role_arn = aws_iam_role.metric_stream_to_firehose.arn
   firehose_arn = aws_kinesis_firehose_delivery_stream.metrics.arn
   output_format = var.output_format
 

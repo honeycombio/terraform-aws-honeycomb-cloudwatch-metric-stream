@@ -68,3 +68,8 @@ Test cases are in [`tests/`](tests/). To setup:
 
 4. There's a small [Bats](https://github.com/sstephenson/bats) that validates
    a few test cases, one for each of the [`examples/`](examples/).  To run it, `bats test.bats`. It does not run `terraform apply` for you, you have to do that first. See [test.bats](tests/test.bats) for more documentation. (Feel free to add more test cases.)
+
+## Contributions
+Features, bug fixes and other changes to this module are gladly accepted. Please open issues or a pull request with your change.
+
+All contributions will be released under the Apache License 2.0.

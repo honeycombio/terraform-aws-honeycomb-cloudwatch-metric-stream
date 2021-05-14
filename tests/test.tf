@@ -29,6 +29,12 @@ variable "honeycomb_api_key" {
   type = string
 }
 
+# Optional - for Secure Tenancy and other proxies
+variable "honeycomb_api_host" {
+  type = string
+  default = "https://api.honeycomb.io"
+}
+
 module "cloudwatch_metric_stream_default" {
   source = "../"
 
@@ -36,6 +42,8 @@ module "cloudwatch_metric_stream_default" {
   honeycomb_dataset_name = "cloudwatch-default"
 
   honeycomb_api_key = var.honeycomb_api_key
+
+  honeycomb_api_host = var.honeycomb_api_host
 
   tags = {
     Environment = "ismith-sandbox"
@@ -49,6 +57,8 @@ module "cloudwatch_metric_stream_with_includes" {
   honeycomb_dataset_name = "cloudwatch-with-includes"
 
   honeycomb_api_key = var.honeycomb_api_key
+
+  honeycomb_api_host = var.honeycomb_api_host
 
   tags = {
     Environment = "ismith-sandbox"
@@ -64,6 +74,8 @@ module "cloudwatch_metric_stream_with_excludes" {
   honeycomb_dataset_name = "cloudwatch-with-excludes"
 
   honeycomb_api_key = var.honeycomb_api_key
+
+  honeycomb_api_host = var.honeycomb_api_host
 
   tags = {
     Environment = "ismith-sandbox"

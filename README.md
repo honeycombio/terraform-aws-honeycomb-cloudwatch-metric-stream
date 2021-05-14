@@ -11,7 +11,7 @@ Required arguments
 - `honeycomb_dataset_name`
 - `honeycomb_api_key`
 
-Everything else is optional; consult docs (TODO: generated docs linked where?)
+Everything else is optional; consult [USAGE.md](USAGE.md)
 for more details.
 
 

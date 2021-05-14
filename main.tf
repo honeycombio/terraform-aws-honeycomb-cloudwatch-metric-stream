@@ -119,7 +119,7 @@ resource "aws_kinesis_firehose_delivery_stream" "metrics" {
     s3_backup_mode     = var.s3_backup_mode
 
     request_configuration {
-      content_encoding = var.http_content_encoding
+      content_encoding = "GZIP"
     }
   }
 }

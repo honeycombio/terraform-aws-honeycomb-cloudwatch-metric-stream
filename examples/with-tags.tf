@@ -1,7 +1,7 @@
 module "cloudwatch_metric_stream_with_tags" {
   source = "../"
 
-  name = "cms_with_tags"
+  name                   = "cms_with_tags"
   honeycomb_dataset_name = "cloudwatch-with-tags"
 
   honeycomb_api_key = var.honeycomb_api_key

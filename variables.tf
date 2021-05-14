@@ -1,6 +1,7 @@
 # Required variables
 variable "name" {
-  type = string
+  type        = string
+  description = "A name for this CloudWatch Metric Stream."
   # required, no default
 
   validation {
@@ -10,23 +11,27 @@ variable "name" {
 }
 
 variable "honeycomb_dataset_name" {
-  type = string
+  type        = string
+  description = "Your Honeycomb dataset name."
 }
 
 variable "honeycomb_api_key" {
-  type = string
+  type        = string
+  description = "Your Honeycomb team's API key."
 }
 
 
 # Optional variables for customer configuration
 variable "honeycomb_api_host" {
-  type    = string
-  default = "https://api.honeycomb.io"
+  type        = string
+  default     = "https://api.honeycomb.io"
+  description = "If you use a Secure Tenancy or other proxy, put its schema://host[:port] here."
 }
 
 variable "tags" {
-  type    = map(string)
-  default = {}
+  type        = map(string)
+  default     = {}
+  description = "A map of tags to apply to resources created by this module."
 }
 
 variable "namespace_include_filters" {
@@ -79,8 +84,9 @@ variable "s3_compression_format" {
 }
 
 variable "s3_backup_mode" {
-  type    = string
-  default = "FailedDataOnly"
+  type        = string
+  default     = "FailedDataOnly"
+  description = "Should we only backup to S3 data that failed delivery, or all data?"
 
   validation {
     condition = contains(["FailedDataOnly", "AllData"],
@@ -89,26 +95,31 @@ variable "s3_backup_mode" {
   }
 }
 
-# By default, AWS will decline to delete S3 buckets that are not empty:
-# `BucketNotEmpty: The bucket you tried to delete is not empty`.  These buckets
-# are used for backup if delivery or processing fail.
-#
-# To allow this module's resources to be removed, we've set force_destroy =
-# true, allowing non-empty buckets to be deleted. If you want to block this and
-# preserve those failed deliveries, you can set this value to false, though that
-# will leave terraform unable to cleanly destroy the module.
 variable "s3_force_destroy" {
-  type    = bool
-  default = true
+  type        = bool
+  default     = true
+  description = <<EOF
+By default, AWS will decline to delete S3 buckets that are not empty:
+`BucketNotEmpty: The bucket you tried to delete is not empty`.  These buckets
+are used for backup if delivery or processing fail.
+#
+To allow this module's resources to be removed, we've set force_destroy =
+true, allowing non-empty buckets to be deleted. If you want to block this and
+preserve those failed deliveries, you can set this value to false, though that
+will leave terraform unable to cleanly destroy the module.
+EOF
 }
 
 
-# Optional variables you are unlikely to want to modify; these are here to ease
-# development and long-term maintainability. Only the default values are
-# supported.
 variable "output_format" {
-  type    = string
-  default = "opentelemetry0.7"
+  type        = string
+  default     = "opentelemetry0.7"
+  description = "Output format of metrics. You should probably not modify this value; the default format is supported, but others may not be."
+
+  validation {
+    condition     = contains(["json", "opentelemetry0.7"], var.output_format)
+    error_message = "Not an allowed output format."
+  }
 }
 
 variable "http_buffering_size" {
@@ -121,9 +132,4 @@ variable "http_buffering_interval" {
   type        = number
   default     = 60
   description = "Kinesis Firehose http buffer interval, in seconds."
-}
-
-variable "http_content_encoding" {
-  type    = string
-  default = "GZIP"
 }

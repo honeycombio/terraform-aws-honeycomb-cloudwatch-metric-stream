@@ -1,0 +1,23 @@
+# This is commented out as a project to debug later. Problems:
+# 1. action fails to push to repo if git-push is true.  Repo write permissions
+# problem, maybe?
+# 2. action still passes if we give it a known-incomplete USAGE.md and set
+# fail-on-diff: true.
+
+# name: Generate terraform docs
+# on: [pull_request]
+# jobs:
+#   docs:
+#     runs-on: ubuntu-latest
+#     steps:
+#     - uses: actions/checkout@v2
+#       with:
+#         ref: ${{ github.event.pull_request.head.ref }}
+#
+#     - name: Render terraform docs inside the USAGE.md and push changes back to PR branch
+#       uses: terraform-docs/gh-actions@v0.6.0
+#       with:
+#         working-dir: .
+#         output-file: USAGE.md
+#         output-method: inject
+#         fail-on-diff: true

@@ -4,7 +4,7 @@ terraform {
   required_providers {
     aws = {
       source = "hashicorp/aws"
-      version = "TODO" # TODO: pending https://github.com/hashicorp/terraform-provider-aws/pull/18870
+      version = "> 0.0.0" # TODO: pending https://github.com/hashicorp/terraform-provider-aws/pull/18870
     }
   }
 }

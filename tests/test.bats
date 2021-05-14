@@ -19,7 +19,10 @@
 ###
 
 # If we've set an aws profile in base.tf, run our tests with that profile.
-aws_profile_from_base_tf=$(grep -P -o '(?<=profile = ").*(?=")' $BATS_TEST_DIRNAME/base.tf | head -n 1)
+#
+# (`sed` normalizes whitespace; the lookbehind in our grep can't use
+# /profile *= # / because lookbehinds must be a known width)
+aws_profile_from_base_tf=$(cat $BATS_TEST_DIRNAME/base.tf | sed 's/  */ /g' | grep -P -o '(?<=profile = ").*(?=")' | head -n 1)
 if [[ "$aws_profile_from_base_tf" ]]; then
   AWS_PROFILE="$aws_profile_from_base_tf"
 fi

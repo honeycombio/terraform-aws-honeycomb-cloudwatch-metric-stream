@@ -8,11 +8,21 @@
 
 ### Run:
 # bats test.bats # Bats can be installed using homebrew (OS X) or apt (Ubuntu)
+#
+# Exit status 254 on all your tests most likely means it can't find the
+# resources - probably you haven't run `terraform apply` or you're using the
+# wrong credentials/profile.
 ###
 
 ### AFTER:
 # Clean up by running `terraform destroy`.
 ###
+
+# If we've set an aws profile in base.tf, run our tests with that profile.
+aws_profile_from_base_tf=$(grep -P -o '(?<=profile = ").*(?=")' $BATS_TEST_DIRNAME/base.tf | head -n 1)
+if [[ "$aws_profile_from_base_tf" ]]; then
+  AWS_PROFILE="$aws_profile_from_base_tf"
+fi
 
 @test "default module creation works" {
   run aws cloudwatch get-metric-stream --name cms_default

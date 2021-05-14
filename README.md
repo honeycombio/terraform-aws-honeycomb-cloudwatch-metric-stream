@@ -67,6 +67,4 @@ Test cases are in [`tests/`](tests/). To setup:
    `terraform destroy`.
 
 4. There's a small [Bats](https://github.com/sstephenson/bats) that validates
-   a few test cases, one for each of the [`examples/`](examples/).  To run it, `bats test.bats`.  If you specified a
-non-default profile in (1), make sure you set it in an env var so `test.bats`
-talks to the right AWS account! (Feel free to add more test cases.)
+   a few test cases, one for each of the [`examples/`](examples/).  To run it, `bats test.bats`. It does not run `terraform apply` for you, you have to do that first. See [test.bats](tests/test.bats) for more documentation. (Feel free to add more test cases.)

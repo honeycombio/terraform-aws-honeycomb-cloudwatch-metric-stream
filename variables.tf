@@ -81,6 +81,12 @@ variable "s3_compression_format" {
 variable "s3_backup_mode" {
   type = string
   default = "FailedDataOnly"
+
+  validation {
+    condition     = contains([ "FailedDataOnly", "AllData" ],
+      var.s3_backup_mode)
+    error_message = "Not an allowed s3_backup_mode."
+  }
 }
 
 # By default, AWS will decline to delete S3 buckets that are not empty:

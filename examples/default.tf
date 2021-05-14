@@ -1,7 +1,7 @@
 module "cloudwatch_metric_stream_default" {
   source = "../"
 
-  name = "cms_default"
+  name                   = "cms_default"
   honeycomb_dataset_name = "cloudwatch-default"
 
   honeycomb_api_key = var.honeycomb_api_key

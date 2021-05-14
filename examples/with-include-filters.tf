@@ -1,7 +1,7 @@
 module "cloudwatch_metric_stream_with_includes" {
   source = "../"
 
-  name = "cms_with_includes"
+  name                   = "cms_with_includes"
   honeycomb_dataset_name = "cloudwatch-with-includes"
 
   honeycomb_api_key = var.honeycomb_api_key

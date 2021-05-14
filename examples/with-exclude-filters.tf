@@ -1,7 +1,7 @@
 module "cloudwatch_metric_stream_with_excludes" {
   source = "../"
 
-  name = "cms_with_excludes"
+  name                   = "cms_with_excludes"
   honeycomb_dataset_name = "cloudwatch-with-excludes"
 
   honeycomb_api_key = var.honeycomb_api_key

@@ -111,13 +111,10 @@ EOF
 }
 
 
-# Optional variables you are unlikely to want to modify; these are here to ease
-# development and long-term maintainability. Only the default values are
-# supported.
 variable "output_format" {
   type        = string
   default     = "opentelemetry0.7"
-  description = "Output format of metrics."
+  description = "Output format of metrics. You should probably not modify this value; the default format is supported, but others may not be."
 
   validation {
     condition     = contains(["json", "opentelemetry0.7"], var.output_format)

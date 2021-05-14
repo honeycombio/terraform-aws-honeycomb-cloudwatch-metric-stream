@@ -11,4 +11,4 @@ if ! (command -v terraform-docs >/dev/null); then
   exit 1
 fi
 
-terraform-docs markdown . --output-file USAGE.md
+terraform-docs markdown table --indent 2 .

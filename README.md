@@ -20,7 +20,8 @@ for more details.
 Examples of use of this module can be found in [`examples/`](examples/).  We've
 provided a default example ("send all metrics") and examples using the
 `namespace_include_filters` and `namespace_exclude_filters (which are mutually
-exclusive).
+exclusive). We've also provided an example of tagging your resources.
+
 
 ## Development
 
@@ -50,7 +51,9 @@ provider_installation {
 } 
 ```
 
-Now you can `terraform plan`, `terraform apply`, etc as usual.
+Now you can `terraform plan`, `terraform apply`, etc as usual. If you run
+`terraform init`, it will complain that this is unnecessary given the
+`dev_overrides`, but you need it to install the modules.
 
 ### Tests
 Test cases are in [`tests/`](tests/). To setup:

@@ -1,22 +1,3 @@
-# Put the below in ~/.terraformrc to override to a local build.
-#
-# This is necessary because terraform-aws-provider does not yet have an
-# aws_cloudwatch_metric_stream resource; once
-# https://github.com/hashicorp/terraform-provider-aws/pull/18870, this whole
-# comment block can go away.
-#
-# provider_installation {
-#   # dev_overrides requires terraform >= 0.14
-#   dev_overrides {
-#     # See
-#     # https://github.com/hashicorp/terraform-provider-aws/blob/main/docs/DEVELOPMENT.md
-#     # for details on building the provider; tl;dr: "make tools && make build" in
-#     # that repo.
-#     "hashicorp/aws" = "/home/USERNAME/go/bin"
-#   }
-#   direct {}
-# }
-
 provider "aws" {
   region = "us-east-1"
   profile = "sandbox"
@@ -40,6 +21,19 @@ module "cloudwatch_metric_stream_default" {
 
   name = "cms_default"
   honeycomb_dataset_name = "cloudwatch-default"
+
+  honeycomb_api_key = var.honeycomb_api_key
+
+  # Users generally don't need to set this unless they're using Secure Tenancy,
+  # but it's here to enable our tests to run.
+  honeycomb_api_host = var.honeycomb_api_host
+}
+
+module "cloudwatch_metric_stream_with_tags" {
+  source = "../"
+
+  name = "cms_with_tags"
+  honeycomb_dataset_name = "cloudwatch-with-tags"
 
   honeycomb_api_key = var.honeycomb_api_key
 

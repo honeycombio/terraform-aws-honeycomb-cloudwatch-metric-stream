@@ -14,8 +14,14 @@
 # Clean up by running `terraform destroy`.
 ###
 
+@test "default module creation works" {
+  run aws cloudwatch get-metric-stream --name cms_default
+
+  [ "$status" -eq 0 ]
+}
+
 @test "module sets tags on 'aws_cloudwatch_metric_stream'" {
-  run aws cloudwatch get-metric-stream --name cms_default --output text --query "Arn"
+  run aws cloudwatch get-metric-stream --name cms_with_tags --output text --query "Arn"
   arn=$output
 
   run aws cloudwatch list-tags-for-resource --resource-arn $arn

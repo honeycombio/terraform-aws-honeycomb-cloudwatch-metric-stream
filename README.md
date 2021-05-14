@@ -13,7 +13,6 @@ module "my-cloudwatch-metrics" {
 
   name = "my-cloudwatch-metrics"
   honeycomb_dataset_name = "my-cloudwatch-metrics"
-
   honeycomb_api_key = "HONEYCOMB_API_KEY"
 }
 ```

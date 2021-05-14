@@ -20,30 +20,30 @@ variable "honeycomb_api_key" {
 
 # Optional variables for customer configuration
 variable "honeycomb_api_host" {
-  type = string
+  type    = string
   default = "https://api.honeycomb.io"
 }
 
 variable "tags" {
-  type = map(string)
+  type    = map(string)
   default = {}
 }
 
 variable "namespace_include_filters" {
-  type = list(string)
-  default = []
+  type        = list(string)
+  default     = []
   description = "An optional list of CloudWatch Metric namespaces to include. If set, we'll only stream metrics from these namespaces. Mutually exclusive with `namespace_exclude_filters`."
 }
 
 variable "namespace_exclude_filters" {
-  type = list(string)
-  default = []
+  type        = list(string)
+  default     = []
   description = "An optional list of CloudWatch Metric namespaces to exclude. If set, we'll only stream metrics that are not in these namespaces. Mutually exclusive with `namespace_include_filters`."
 }
 
 variable "s3_buffer_size" {
-  type = number
-  default = 10
+  type        = number
+  default     = 10
   description = "In MiB. See https://docs.aws.amazon.com/firehose/latest/dev/create-configure.html"
 
   validation {
@@ -53,8 +53,8 @@ variable "s3_buffer_size" {
 }
 
 variable "s3_buffer_interval" {
-  type = number
-  default = 400
+  type        = number
+  default     = 400
   description = "In seconds. See https://docs.aws.amazon.com/firehose/latest/dev/create-configure.html"
 
   validation {
@@ -64,27 +64,27 @@ variable "s3_buffer_interval" {
 }
 
 variable "s3_compression_format" {
-  type = string
-  default = "GZIP"
+  type        = string
+  default     = "GZIP"
   description = "May be GZIP, Snappy, Zip, or Hadoop-Compatiable Snappy. See https://docs.aws.amazon.com/firehose/latest/dev/create-configure.html"
 
   validation {
-    condition     = contains(["GZIP",
+    condition = contains(["GZIP",
       "Snappy",
       "Zip",
       "Hadoop-Compatible Snappy"],
-      var.s3_compression_format)
+    var.s3_compression_format)
     error_message = "Not an allowed compression format."
   }
 }
 
 variable "s3_backup_mode" {
-  type = string
+  type    = string
   default = "FailedDataOnly"
 
   validation {
-    condition     = contains([ "FailedDataOnly", "AllData" ],
-      var.s3_backup_mode)
+    condition = contains(["FailedDataOnly", "AllData"],
+    var.s3_backup_mode)
     error_message = "Not an allowed s3_backup_mode."
   }
 }
@@ -98,7 +98,7 @@ variable "s3_backup_mode" {
 # preserve those failed deliveries, you can set this value to false, though that
 # will leave terraform unable to cleanly destroy the module.
 variable "s3_force_destroy" {
-  type = bool
+  type    = bool
   default = true
 }
 
@@ -107,23 +107,23 @@ variable "s3_force_destroy" {
 # development and long-term maintainability. Only the default values are
 # supported.
 variable "output_format" {
-  type = string
+  type    = string
   default = "opentelemetry0.7"
 }
 
 variable "http_buffering_size" {
-  type = number
-  default = 15
+  type        = number
+  default     = 15
   description = "Kinesis Firehose http buffer size, in MiB."
 }
 
 variable "http_buffering_interval" {
-  type = number
-  default = 60
+  type        = number
+  default     = 60
   description = "Kinesis Firehose http buffer interval, in seconds."
 }
 
 variable "http_content_encoding" {
-  type = string
+  type    = string
   default = "GZIP"
 }

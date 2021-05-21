@@ -3,7 +3,7 @@
 # destroy`.
 
 ### BEFORE:
-# Configure terraform (to be doc'd in more detail?) and run `terraform apply`.
+# Configure terraform and run `terraform apply`.
 ###
 
 ### Run:

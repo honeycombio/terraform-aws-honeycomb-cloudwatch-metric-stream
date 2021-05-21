@@ -1,6 +1,8 @@
 Terraform AWS-Honeycomb CloudWatch Metrics Stream module
 ========================================================
 
+**STATUS: BETA.** You're welcome to try it, and let us know your feedback in the issues!
+
 This module creates resources to send your CloudWatch Metrics to
 [Honeycomb](https://www.honeycomb.io).
 

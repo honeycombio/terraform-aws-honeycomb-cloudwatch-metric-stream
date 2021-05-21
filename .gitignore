@@ -2,3 +2,4 @@ tests/test.auto.tfvars
 tests/*.tfstate
 tests/*.tfstate.backup
 tests/.terraform
+**/.terraform.*

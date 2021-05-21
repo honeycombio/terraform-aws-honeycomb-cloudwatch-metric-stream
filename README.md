@@ -31,36 +31,6 @@ exclusive). We've also provided an example of tagging your resources.
 
 ## Development
 
-### Forked hashicorp/aws provider
-Since the `aws_cloudwatch_metric_stream` resource is [not yet
-released](https://github.com/hashicorp/terraform-provider-aws/pull/18870),
-you'll need to build a local copy:
-
-```bash
-# I assume you have the gh command from github installed; if not, just check out
-# the branch in question by hand
-gh repo clone hashicorp/terraform-provider-aws
-cd terraform-provider-aws
-gh pr checkout 18870
-
-make tools
-make build # installs to $GOPATH/bin/terraform-provider-aws
-```
-
-And configure terraform to use it by putting this in `~/.terraformrc` (change
-`/home/USERNAME/go` to match your `$GOPATH`):
-```hcl
-provider_installation {
-  dev_overrides {
-    "hashicorp/aws" = "/home/USERNAME/go/bin"
-  } 
-} 
-```
-
-Now you can `terraform plan`, `terraform apply`, etc as usual. If you run
-`terraform init`, it will complain that this is unnecessary given the
-`dev_overrides`, but you need it to install the modules.
-
 ### Tests
 Test cases are in [`tests/`](tests/). To setup:
 

@@ -15,9 +15,9 @@ variable "honeycomb_dataset_name" {
   description = "Your Honeycomb dataset name."
 }
 
-variable "honeycomb_writekey" {
+variable "honeycomb_api_key" {
   type        = string
-  description = "Your Honeycomb team's writekey/API key."
+  description = "Your Honeycomb team's API key."
 }
 
 

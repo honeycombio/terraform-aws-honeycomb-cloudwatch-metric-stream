@@ -112,7 +112,7 @@ resource "aws_kinesis_firehose_delivery_stream" "metrics" {
     url  = "${var.honeycomb_api_host}/1/kinesis_events/${var.honeycomb_dataset_name}"
     name = "Honeycomb-${var.honeycomb_dataset_name}"
 
-    access_key         = var.honeycomb_writekey
+    access_key         = var.honeycomb_api_key
     buffering_size     = var.http_buffering_size
     buffering_interval = var.http_buffering_interval
     role_arn           = aws_iam_role.firehose_to_s3.arn

@@ -9,7 +9,7 @@ This module creates resources to send your CloudWatch Metrics to
 The minimal config is:
 ```hcl
 module "my-cloudwatch-metrics" {
-  source = "honeycombio/terraform-aws-honeycomb-cloudwatch-metric-stream"
+  source = "app.terraform.io/honeycomb/honeycomb-cloudwatch-metric-stream/aws"
 
   name = "my-cloudwatch-metrics"
   honeycomb_dataset_name = "my-cloudwatch-metrics"

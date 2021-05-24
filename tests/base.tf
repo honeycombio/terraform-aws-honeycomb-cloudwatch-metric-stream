@@ -4,7 +4,7 @@ provider "aws" {
   shared_credentials_file = pathexpand("~/aws/credentials")
 }
 
-variable "honeycomb_api_key" {
+variable "honeycomb_writekey" {
   type = string
 }
 

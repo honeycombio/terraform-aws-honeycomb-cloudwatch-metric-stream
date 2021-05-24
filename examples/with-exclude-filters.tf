@@ -1,5 +1,5 @@
 module "cloudwatch_metric_stream_with_excludes" {
-  source = "../"
+  source = "app.terraform.io/honeycomb/honeycomb-cloudwatch-metric-stream/aws"
 
   name                   = "cms_with_excludes"
   honeycomb_dataset_name = "cloudwatch-with-excludes"

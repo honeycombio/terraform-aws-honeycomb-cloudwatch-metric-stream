@@ -13,7 +13,7 @@ module "my-cloudwatch-metrics" {
 
   name = "my-cloudwatch-metrics"
   honeycomb_dataset_name = "my-cloudwatch-metrics"
-  honeycomb_writekey = "HONEYCOMB_WRITEKEY"
+  honeycomb_api_key = "HONEYCOMB_API_KEY"
 }
 ```
 
@@ -37,7 +37,7 @@ Test cases are in [`tests/`](tests/). To setup:
 1. Edit the `provider "aws"` block to fit your credentials.
 
 2. Create a `test.auto.tfvars` file in `tests/` with values for
-   `honeycomb_writekey` and, optionally, `honeycomb_api_host`.
+   `honeycomb_api_key` and, optionally, `honeycomb_api_host`.
 
 3. `terraform plan` and `terraform apply` will now work as expected, as will
    `terraform destroy`.

@@ -13,8 +13,15 @@ module "my-cloudwatch-metrics" {
 
   name = "my-cloudwatch-metrics"
   honeycomb_dataset_name = "my-cloudwatch-metrics"
-  honeycomb_api_key = "HONEYCOMB_API_KEY"
+  honeycomb_api_key = var.honeycomb_api_key
 }
+```
+
+Ensure the environment variable `TF_VAR_honeycomb_api_key` is exported on the system.
+
+Additionally, in `variables.tf` you can include an empty placeholder to the variable.
+```hcl
+variable "honeycomb_api_key" {}
 ```
 
 For more config options, including resource tagging and namespace

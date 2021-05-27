@@ -13,9 +13,21 @@ module "my-cloudwatch-metrics" {
 
   name = "my-cloudwatch-metrics"
   honeycomb_dataset_name = "my-cloudwatch-metrics"
-  honeycomb_api_key = "HONEYCOMB_API_KEY"
+  honeycomb_api_key = var.honeycomb_api_key
 }
 ```
+
+You can load terraform variables from the system by ensuring the environment variable `TF_VAR_honeycomb_api_key` is exported on the system.
+```bash
+export TF_VAR_honeycomb_api_key=$HONEYCOMB_API_KEY
+```
+
+Additionally, in `variables.tf` you can include an empty placeholder to the variable.
+```hcl
+variable "honeycomb_api_key" {}
+```
+
+Now when you run `terraform plan/apply` you will not be prompted for your API key during the sequence.
 
 For more config options, including resource tagging and namespace
 include/exclude filters, see [USAGE.md](USAGE.md).

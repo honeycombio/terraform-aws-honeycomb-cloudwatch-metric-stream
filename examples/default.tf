@@ -1,5 +1,5 @@
 module "cloudwatch_metric_stream_default" {
-  source = "app.terraform.io/honeycomb/honeycomb-cloudwatch-metric-stream/aws"
+  source = "honeycomb/honeycomb-cloudwatch-metric-stream/aws"
 
   name                   = "cms_default"
   honeycomb_dataset_name = "cloudwatch-default"

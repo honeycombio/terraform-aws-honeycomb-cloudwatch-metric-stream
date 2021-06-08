@@ -1,5 +1,5 @@
 module "cloudwatch_metric_stream_with_tags" {
-  source = "app.terraform.io/honeycomb/honeycomb-cloudwatch-metric-stream/aws"
+  source = "honeycomb/honeycomb-cloudwatch-metric-stream/aws"
 
   name                   = "cms_with_tags"
   honeycomb_dataset_name = "cloudwatch-with-tags"

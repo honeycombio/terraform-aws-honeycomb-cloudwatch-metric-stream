@@ -4,17 +4,31 @@
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | > 0.0.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 3.75.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | > 0.0.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 3.75.0 |
 
 ## Modules
 
 No modules.
+
+## Upgrading
+
+If upgrading from version <= 0.3.1, the module now requires AWS Provider 3.75.0+ in order to support
+the 4.x version of the provider and the changes to the `aws_s3_bucket` resource.
+
+Before you run `apply` with the new version, you must import the ACL into the new resource.
+For example, for a module named "cloudwatch-otlp" the following import command should be run:
+
+```sh
+terraform import module.cloudwatch-otlp.aws_s3_bucket_acl.metric_stream cloudwatch-otlp,private
+```
+
+For more information, see the [AWS Provider Version 4 Upgrade Guide](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/guides/version-4-upgrade#s3-bucket-refactor).
 
 ## Resources
 
@@ -42,9 +56,9 @@ No modules.
 | <a name="input_namespace_include_filters"></a> [namespace\_include\_filters](#input\_namespace\_include\_filters) | An optional list of CloudWatch Metric namespaces to include. If set, we'll only stream metrics from these namespaces. Mutually exclusive with `namespace_exclude_filters`. | `list(string)` | `[]` | no |
 | <a name="input_output_format"></a> [output\_format](#input\_output\_format) | Output format of metrics. You should probably not modify this value; the default format is supported, but others may not be. | `string` | `"opentelemetry0.7"` | no |
 | <a name="input_s3_backup_mode"></a> [s3\_backup\_mode](#input\_s3\_backup\_mode) | Should we only backup to S3 data that failed delivery, or all data? | `string` | `"FailedDataOnly"` | no |
-| <a name="input_s3_buffer_interval"></a> [s3\_buffer\_interval](#input\_s3\_buffer\_interval) | In seconds. See https://docs.aws.amazon.com/firehose/latest/dev/create-configure.html | `number` | `400` | no |
-| <a name="input_s3_buffer_size"></a> [s3\_buffer\_size](#input\_s3\_buffer\_size) | In MiB. See https://docs.aws.amazon.com/firehose/latest/dev/create-configure.html | `number` | `10` | no |
-| <a name="input_s3_compression_format"></a> [s3\_compression\_format](#input\_s3\_compression\_format) | May be GZIP, Snappy, Zip, or Hadoop-Compatiable Snappy. See https://docs.aws.amazon.com/firehose/latest/dev/create-configure.html | `string` | `"GZIP"` | no |
+| <a name="input_s3_buffer_interval"></a> [s3\_buffer\_interval](#input\_s3\_buffer\_interval) | In seconds. See <https://docs.aws.amazon.com/firehose/latest/dev/create-configure.html> | `number` | `400` | no |
+| <a name="input_s3_buffer_size"></a> [s3\_buffer\_size](#input\_s3\_buffer\_size) | In MiB. See <https://docs.aws.amazon.com/firehose/latest/dev/create-configure.html> | `number` | `10` | no |
+| <a name="input_s3_compression_format"></a> [s3\_compression\_format](#input\_s3\_compression\_format) | May be GZIP, Snappy, Zip, or Hadoop-Compatiable Snappy. See <https://docs.aws.amazon.com/firehose/latest/dev/create-configure.html> | `string` | `"GZIP"` | no |
 | <a name="input_s3_force_destroy"></a> [s3\_force\_destroy](#input\_s3\_force\_destroy) | By default, AWS will decline to delete S3 buckets that are not empty:<br>`BucketNotEmpty: The bucket you tried to delete is not empty`.  These buckets<br>are used for backup if delivery or processing fail.<br>#<br>To allow this module's resources to be removed, we've set force\_destroy =<br>true, allowing non-empty buckets to be deleted. If you want to block this and<br>preserve those failed deliveries, you can set this value to false, though that<br>will leave terraform unable to cleanly destroy the module. | `bool` | `true` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to apply to resources created by this module. | `map(string)` | `{}` | no |
 

@@ -1,5 +1,10 @@
+# DEPRECATED
+
+Please use the [CloudWatch Metrics submodule](https://registry.terraform.io/modules/honeycombio/integrations/aws/latest/submodules/cloudwatch-metrics) included in the [Honeycomb AWS Integrations module](https://registry.terraform.io/modules/honeycombio/integrations/aws/latest) instead.
+
 Terraform AWS-Honeycomb CloudWatch Metrics Stream module
 ========================================================
+
 
 This module creates resources to send your CloudWatch Metrics to
 [Honeycomb](https://www.honeycomb.io).
